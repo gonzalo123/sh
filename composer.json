@@ -1,0 +1,19 @@
+{
+    "name":"gonzalo123/sh",
+    "description":"Command line helper",
+    "license":"GPL",
+    "authors":[
+        {
+            "name":"Gonzalo Ayuso",
+            "email":"gonzalo123@gmail.com"
+        }
+    ],
+    "require":{
+        "symfony/process":"dev-master"
+    },
+    "autoload":{
+        "psr-0":{
+            "":"lib/"
+        }
+    }
+}
