@@ -41,6 +41,6 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
 
     public function testSimpleCommnadWithMoreArgumentsAsArray()
     {
-        $this->assertEquals("fixtures\nIntegrationTest.php\nParserTest.php", $this->sh->ls(['..', '-A']));
+        $this->assertEquals("fixtures\nIntegrationTest.php\nParserTest.php", $this->sh->ls(array('..', '-A')));
     }
 }
