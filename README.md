@@ -1,5 +1,7 @@
 Command line library for PHP that allows to call programs as functions.
 
+[![Build Status](https://secure.travis-ci.org/gonzalo123/sh.png?branch=master)](https://travis-ci.org/gonzalo123/sh)
+
 Inspired in Python Sh library (http://amoffat.github.com/sh/)
 
 usage examples:
