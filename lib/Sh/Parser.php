@@ -10,13 +10,13 @@ class Parser
         if (is_null($comandArgument)) return $name;
 
         if (is_array($comandArgument)) {
-            $comandArgument = implode(' ', $this->SurroundItemsWithSpacesWithQuotes($comandArgument));
+            $comandArgument = implode(' ', $this->surroundItemsWithSpacesWithQuotes($comandArgument));
         }
 
         return $name . ' ' . $comandArgument;
     }
 
-    private function SurroundItemsWithSpacesWithQuotes($comandArgument)
+    private function surroundItemsWithSpacesWithQuotes($comandArgument)
     {
         return array_map(function ($item) {
             return strpos($item, ' ') !== FALSE ? "'{$item}'" : $item;
