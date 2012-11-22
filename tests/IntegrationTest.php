@@ -21,7 +21,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
 
     public function testSimpleCommandWithCommandAsAVariable()
     {
-        $this->assertEquals($this->directory, $this->sh->runCommad('pwd'));
+        $this->assertEquals($this->directory, $this->sh->runCommand('pwd'));
     }
 
     public function testSimpleCommandWithArguments()
@@ -31,7 +31,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
 
     public function testSimpleCommandWithArgumentsWithCommandAsAVariable()
     {
-        $this->assertEquals("bar\nfoo", $this->sh->runCommad('ls', "-A"));
+        $this->assertEquals("bar\nfoo", $this->sh->runCommand('ls', "-A"));
     }
 
     public function testSimpleCommandWithMoreArguments()

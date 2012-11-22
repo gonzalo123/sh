@@ -25,7 +25,7 @@ class Sh
      * @param null|Callable      $lineCallback
      * @return null|string
      */
-    public function runCommad($name, $comandArgument = null, $lineCallback = null)
+    public function runCommand($name, $comandArgument = null, $lineCallback = null)
     {
         $output  = null;
         $command = new Command($name, $comandArgument);
@@ -56,7 +56,7 @@ class Sh
         $comandArgument = isset($arguments[0]) ? $arguments[0] : null;
         $lineCallback   = isset($arguments[1]) ? $arguments[1] : null;
 
-        return $this->runCommad($name, $comandArgument, $lineCallback);
+        return $this->runCommand($name, $comandArgument, $lineCallback);
     }
 
     public function getTimeout()
