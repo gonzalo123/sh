@@ -5,7 +5,6 @@ class Sh
 {
     const DEFAULT_TIMEOUT = 3600;
     private $timeout;
-    private $parser;
 
     /**
      * @param int|NULL $timeout
@@ -13,7 +12,6 @@ class Sh
     public function __construct($timeout = self::DEFAULT_TIMEOUT)
     {
         $this->setTimeout($timeout);
-        $this->parser = new Parser;
     }
 
     public static function factory($timeout = self::DEFAULT_TIMEOUT)
@@ -31,8 +29,10 @@ class Sh
     public function runCommnad($name, $comandArgument = NULL, $lineCallback = NULL)
     {
         $output  = NULL;
-        $command = $this->parser->getCommandToProcess($name, $comandArgument);
-        $command->setTimeout($this->timeout);
+
+        $command = new Command($name, $comandArgument);
+        $command->setSh($this);
+        $command->setLineCallback($lineCallback);
 
         return $command;
     }
@@ -57,5 +57,10 @@ class Sh
         $lineCallback   = isset($arguments[1]) ? $arguments[1] : NULL;
 
         return $this->runCommnad($name, $comandArgument, $lineCallback);
+    }
+
+    public function getTimeout()
+    {
+        return $this->timeout;
     }
 }

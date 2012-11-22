@@ -6,37 +6,26 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 {
     private $parser;
 
-    public function setUp()
-    {
-        $this->parser = new Parser;
-    }
-
     public function dataProvider()
     {
         return array(
             array(
-                'expected'      => 'pwd',
-                'actualCommand' => 'pwd',
+                'expected'      => '',
                 'arguments'     => NULL),
             array(
-                'expected'      => 'ps -fuax',
-                'actualCommand' => 'ps',
+                'expected'      => '-fuax',
                 'arguments'     => '-fuax'),
             array(
-                'expected'      => 'ps -fuax',
-                'actualCommand' => 'ps',
+                'expected'      => '-fuax',
                 'arguments'     => array('-fuax')),
             array(
-                'expected'      => 'ls -latr ~/fixtures',
-                'actualCommand' => 'ls',
+                'expected'      => '-latr ~/fixtures',
                 'arguments'     => array('-latr', '~/fixtures')),
             array(
-                'expected'      => 'notify-send -t 5000 title HOLA',
-                'actualCommand' => 'notify-send',
+                'expected'      => '-t 5000 title HOLA',
                 'arguments'     => array('-t', 5000, 'title', 'HOLA')),
             array(
-                'expected'      => 'notify-send -t 5000 title "Hola Gonzalo"',
-                'actualCommand' => 'notify-send',
+                'expected'      => '-t 5000 title "Hola Gonzalo"',
                 'arguments'     => array('-t', 5000, 'title' => 'Hola Gonzalo')
             ),
         );
@@ -45,11 +34,11 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataProvider
      */
-    public function testParser($expected, $command, $arguments)
+    public function testParser($expected, $arguments)
     {
-        $command = $this->parser->getCommandToProcess($command, $arguments);
+        $parser = new Parser($arguments);
+        $parsedArguments = $parser->getParsedArguments();
 
-        $this->assertInstanceOf('Sh\Command', $command);
-        $this->assertEquals($expected, $command->bake());
+        $this->assertEquals($expected, $parsedArguments);
     }
 }
