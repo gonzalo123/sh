@@ -1,14 +1,22 @@
 {
     "name":"gonzalo123/sh",
     "description":"Command line helper",
-    "license":"GPL",
+    "license":"MIT",
+    "keywords":["cli", "process", "console"],
+    "type":"library",
+    "homepage":"https://github.com/gonzalo123/sh",
     "authors":[
         {
             "name":"Gonzalo Ayuso",
-            "email":"gonzalo123@gmail.com"
+            "email":"gonzalo123@gmail.com",
+            "homepage":"http://gonzalo123.com"
         }
     ],
+    "support":{
+        "issues":"https://github.com/gonzalo123/sh/issues"
+    },
     "require":{
+        "php":">=5.3.0",
         "symfony/process":"dev-master"
     },
     "autoload":{

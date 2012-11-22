@@ -39,3 +39,16 @@ $sh->ssh(array('myserver.com', '-p' => 1393))->tail(array("/var/log/dumb_daemon.
 // executes: ssh myserver.com -p 1393 tail /var/log/dumb_daemon.log -n 100
 });
 ```
+
+Composer require
+:
+``
+    "require":{
+        "gonzalo123/sh": "dev-master",
+        "symfony/process":"dev-master"
+    },`
+
+```
+
+
+https://packagist.org/packages/gonzalo123/sh
