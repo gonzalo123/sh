@@ -6,6 +6,7 @@ Inspired in Python Sh library (http://amoffat.github.com/sh/)
 
 usage examples:
 
+
 ```php
 <?php
 error_reporting(-1);
