@@ -10,16 +10,20 @@ class Parser
         if (is_null($commandArgument)) return $name;
 
         if (is_array($commandArgument)) {
-            $commandArgument = implode(' ', $this->surroundItemsWithSpacesWithQuotes($commandArgument));
+            $out = array();
+            foreach ($commandArgument as $key => $value) {
+                $value = $this->surroundItemsWithSpacesWithQuotes($value);
+                $out[] = (is_string($key)) ? "{$key} {$value}" : $value;
+            }
+
+            $commandArgument = implode(' ', $out);
         }
 
         return $name . ' ' . $commandArgument;
     }
 
-    private function surroundItemsWithSpacesWithQuotes($commandArgument)
+    private function surroundItemsWithSpacesWithQuotes($item)
     {
-        return array_map(function ($item) {
-            return strpos($item, ' ') !== FALSE ? "'{$item}'" : $item;
-        }, $commandArgument);
+        return strpos($item, ' ') !== FALSE ? "\"{$item}\"" : $item;
     }
 }

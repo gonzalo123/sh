@@ -35,9 +35,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                 'actualCommand' => 'notify-send',
                 'arguments'     => array('-t', 5000, 'title', 'HOLA')),
             array(
-                'expected'      => "notify-send -t 5000 title 'Hola Gonzalo'",
+                'expected'      => 'notify-send -t 5000 title "Hola Gonzalo"',
                 'actualCommand' => 'notify-send',
-                'arguments'     => array('-t', 5000, 'title', 'Hola Gonzalo')
+                'arguments'     => array('-t', 5000, 'title' => 'Hola Gonzalo')
             ),
         );
     }
