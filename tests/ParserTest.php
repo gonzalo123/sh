@@ -47,6 +47,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function testParser($expected, $command, $arguments)
     {
-        $this->assertEquals($expected, $this->parser->getCommandToProcess($command, $arguments));
+        $command = $this->parser->getCommandToProcess($command, $arguments);
+
+        $this->assertInstanceOf('Sh\Command', $command);
+        $this->assertEquals($expected, $command->bake());
     }
 }

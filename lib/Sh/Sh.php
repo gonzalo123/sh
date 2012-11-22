@@ -1,8 +1,6 @@
 <?php
 namespace Sh;
 
-use Symfony\Component\Process\Process;
-
 class Sh
 {
     const DEFAULT_TIMEOUT = 3600;
@@ -33,20 +31,10 @@ class Sh
     public function runCommnad($name, $comandArgument = NULL, $lineCallback = NULL)
     {
         $output  = NULL;
-        $process = new Process($this->parser->getCommandToProcess($name, $comandArgument));
-        $process->setTimeout($this->timeout);
+        $command = $this->parser->getCommandToProcess($name, $comandArgument);
+        $command->setTimeout($this->timeout);
 
-        if (is_callable($lineCallback)) {
-            $process->run(function ($type, $buffer) use ($lineCallback) {
-                call_user_func_array($lineCallback, array($buffer, $type));
-            });
-            ;
-        } else {
-            $process->run();
-            $output = $process->getOutput();
-        }
-
-        return trim($output);
+        return $command;
     }
 
     private function getCommandToProcess($name, $comandArgument)
@@ -54,13 +42,13 @@ class Sh
         if (is_array($comandArgument)) {
             $comandArgument = implode(' ', $comandArgument);
         }
-
         return $name . ' ' . $comandArgument;
     }
 
     public function setTimeout($timeout)
     {
         $this->timeout = $timeout;
+        return $this;
     }
 
     public function __call($name, $arguments)

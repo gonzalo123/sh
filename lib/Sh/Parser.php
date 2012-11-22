@@ -5,10 +5,8 @@ use Symfony\Component\Process\Process;
 
 class Parser
 {
-    public function getCommandToProcess($name, $commandArgument = NULL)
+    public function getCommandToProcess($name, $commandArgument = null)
     {
-        if (is_null($commandArgument)) return $name;
-
         if (is_array($commandArgument)) {
             $out = array();
             foreach ($commandArgument as $key => $value) {
@@ -19,11 +17,11 @@ class Parser
             $commandArgument = implode(' ', $out);
         }
 
-        return $name . ' ' . $commandArgument;
+        return new Command($name, $commandArgument);
     }
 
     private function surroundItemsWithSpacesWithQuotes($item)
     {
-        return strpos($item, ' ') !== FALSE ? "\"{$item}\"" : $item;
+        return strpos($item, ' ') !== false ? "\"{$item}\"" : $item;
     }
 }

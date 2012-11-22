@@ -36,11 +36,11 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
 
     public function testSimpleCommnadWithMoreArguments()
     {
-        $this->assertEquals("fixtures\nIntegrationTest.php\nParserTest.php", $this->sh->ls(".. -A"));
+        $this->assertEquals("BakingTest.php\nfixtures\nIntegrationTest.php\nParserTest.php", $this->sh->ls(".. -A"));
     }
 
     public function testSimpleCommnadWithMoreArgumentsAsArray()
     {
-        $this->assertEquals("fixtures\nIntegrationTest.php\nParserTest.php", $this->sh->ls(array('..', '-A')));
+        $this->assertEquals("BakingTest.php\nfixtures\nIntegrationTest.php\nParserTest.php", $this->sh->ls(array('..', '-A')));
     }
 }
