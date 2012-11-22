@@ -17,7 +17,6 @@ class Parser
     private function parseArguments()
     {
         $out = null;
-
         if (is_array($this->arguments)) {
             $out = array();
             foreach ($this->arguments as $key => $value) {
@@ -28,6 +27,7 @@ class Parser
         } else {
             $out = $this->arguments;
         }
+
         return $out;
     }
 

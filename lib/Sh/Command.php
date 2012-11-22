@@ -6,24 +6,23 @@ use Symfony\Component\Process\Process;
 class Command
 {
     private $name;
+    private $commandArgument;
+
     /** @var \Sh\Sh */
     private $sh;
-    private $commandArgument;
-    private $timeout;
-
-    /** @var NULL|Callable  */
+    /** @var null|Callable  */
     private $lineCallback;
 
     public function __construct($name, $commandArgument = null)
     {
         $this->name = $name;
         $parser = new Parser($commandArgument);
-        $this->commandArgument =  $parser->getParsedArguments();
+        $this->commandArgument = $parser->getParsedArguments();
     }
 
     function __toString()
     {
-        $output = NULL;
+        $output = null;
         $commandString = $this->getCommandString();
 
         $process = new Process($commandString);
@@ -42,19 +41,24 @@ class Command
 
     public function __call($name, $arguments)
     {
-        $comandArgument = isset($arguments[0]) ? $arguments[0] : NULL;
-        $lineCallback = isset($arguments[1]) ? $arguments[1] : NULL;
+        $comandArgument = isset($arguments[0]) ? $arguments[0] : null;
+        $lineCallback = isset($arguments[1]) ? $arguments[1] : null;
 
+        $command = new Command($this->name, $this->getMixedArguments($name, $comandArgument));
+        $command->setSh($this->sh);
+        $command->setLineCallback($lineCallback);
+
+        return $command;
+    }
+
+    private function getMixedArguments($name, $comandArgument)
+    {
         $mixedArguments = array($this->commandArgument, $name);
         if (!is_null($comandArgument)) {
             $parser = new Parser($comandArgument);
             $mixedArguments[] = $parser->getParsedArguments();
         }
-        $command = new Command($this->name, implode(' ',  $mixedArguments));
-        $command->setSh($this->sh);
-        $command->setLineCallback($lineCallback);
-
-        return $command;
+        return implode(' ',  $mixedArguments);
     }
 
     public function getString()
@@ -71,7 +75,6 @@ class Command
     {
         return is_null($this->commandArgument) ? $this->name : $this->name . ' ' . $this->commandArgument;
     }
-
 
     public function setSh(Sh $sh)
     {

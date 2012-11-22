@@ -7,7 +7,7 @@ class Sh
     private $timeout;
 
     /**
-     * @param int|NULL $timeout
+     * @param int|null $timeout
      */
     public function __construct($timeout = self::DEFAULT_TIMEOUT)
     {
@@ -21,15 +21,13 @@ class Sh
 
     /**
      * @param string             $name
-     * @param NULL|string|array  $comandArgument
-     * @param NULL|Closure       $lineCallback
-     * @return NULL|string
-     * @throws RuntimeException
+     * @param null|string|array  $comandArgument
+     * @param null|Callable      $lineCallback
+     * @return null|string
      */
-    public function runCommnad($name, $comandArgument = NULL, $lineCallback = NULL)
+    public function runCommnad($name, $comandArgument = null, $lineCallback = null)
     {
-        $output  = NULL;
-
+        $output  = null;
         $command = new Command($name, $comandArgument);
         $command->setSh($this);
         $command->setLineCallback($lineCallback);
@@ -42,19 +40,21 @@ class Sh
         if (is_array($comandArgument)) {
             $comandArgument = implode(' ', $comandArgument);
         }
+
         return $name . ' ' . $comandArgument;
     }
 
     public function setTimeout($timeout)
     {
         $this->timeout = $timeout;
+        
         return $this;
     }
 
     public function __call($name, $arguments)
     {
-        $comandArgument = isset($arguments[0]) ? $arguments[0] : NULL;
-        $lineCallback   = isset($arguments[1]) ? $arguments[1] : NULL;
+        $comandArgument = isset($arguments[0]) ? $arguments[0] : null;
+        $lineCallback   = isset($arguments[1]) ? $arguments[1] : null;
 
         return $this->runCommnad($name, $comandArgument, $lineCallback);
     }

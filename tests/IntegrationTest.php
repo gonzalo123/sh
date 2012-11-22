@@ -36,11 +36,8 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
 
     public function testSimpleCommnadWithMoreArguments()
     {
-        $this->assertEquals("BakingTest.php\nfixtures\nIntegrationTest.php\nParserTest.php", $this->sh->ls(".. -A"));
-    }
-
-    public function testSimpleCommnadWithMoreArgumentsAsArray()
-    {
-        $this->assertEquals("BakingTest.php\nfixtures\nIntegrationTest.php\nParserTest.php", $this->sh->ls(array('..', '-A')));
+        $expected = "BakingTest.php\nfixtures\nIntegrationTest.php\nParserTest.php";
+        $actual   = $this->sh->ls(".. -A");
+        $this->assertEquals($expected, $actual);
     }
 }
