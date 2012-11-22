@@ -7,7 +7,7 @@ include __DIR__ . '/../vendor/autoload.php';
 use Sh\Sh;
 
 // Simple command using factory
-echo Sh::factory()->runCommnad('notify-send', array('-t', 5000, 'title', 'HOLA'));
+echo Sh::factory()->runCommad('notify-send', array('-t', 5000, 'title', 'HOLA'));
 
 // with instance
 $sh  = new Sh();

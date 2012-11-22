@@ -19,22 +19,22 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->directory, $this->sh->pwd());
     }
 
-    public function testSimpleCommandWithCommnadAsAVariable()
+    public function testSimpleCommandWithCommandAsAVariable()
     {
-        $this->assertEquals($this->directory, $this->sh->runCommnad('pwd'));
+        $this->assertEquals($this->directory, $this->sh->runCommad('pwd'));
     }
 
-    public function testSimpleCommnadWithArguments()
+    public function testSimpleCommandWithArguments()
     {
         $this->assertEquals("bar\nfoo", $this->sh->ls("-A"));
     }
 
-    public function testSimpleCommnadWithArgumentsWithCommnadAsAVariable()
+    public function testSimpleCommandWithArgumentsWithCommandAsAVariable()
     {
-        $this->assertEquals("bar\nfoo", $this->sh->runCommnad('ls', "-A"));
+        $this->assertEquals("bar\nfoo", $this->sh->runCommad('ls', "-A"));
     }
 
-    public function testSimpleCommnadWithMoreArguments()
+    public function testSimpleCommandWithMoreArguments()
     {
         $expected = "BakingTest.php\nfixtures\nIntegrationTest.php\nParserTest.php";
         $actual   = $this->sh->ls(".. -A");
