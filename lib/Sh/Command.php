@@ -16,12 +16,11 @@ use Symfony\Component\Process\Process;
 class Command
 {
     private $name;
+    private $lineCallback;
     private $commandArgument;
 
     /** @var \Sh\Sh */
     private $sh;
-    /** @var null|Callable  */
-    private $lineCallback;
 
     public function __construct($name, $commandArgument = null)
     {
@@ -38,15 +37,22 @@ class Command
         $process = new Process($commandString);
         $process->setTimeout($this->sh->getTimeout());
 
-        if (is_callable($this->lineCallback)) {
-            $process->run(function ($type, $buffer) {
+        $process->run();
+
+        return trim($process->getOutput());
+    }
+
+    public function doCallback()
+    {
+        $output        = null;
+        $process = new Process($this->getCommandString());
+        $process->setTimeout($this->sh->getTimeout());
+        $process->run(function ($type, $buffer) {
                 call_user_func_array($this->lineCallback, array($buffer, $type));
-            });
-        } else {
-            $process->run();
-            $output = $process->getOutput();
-        }
-        return trim($output);
+            }
+        );
+
+        return;
     }
 
     public function __call($name, $arguments)
@@ -76,11 +82,6 @@ class Command
         return $this->getCommandString();
     }
 
-    public function setLineCallback($lineCallback)
-    {
-        $this->lineCallback = $lineCallback;
-    }
-
     private function getCommandString()
     {
         return is_null($this->commandArgument) ? $this->name : $this->name . ' ' . $this->commandArgument;
@@ -89,5 +90,10 @@ class Command
     public function setSh(Sh $sh)
     {
         $this->sh = $sh;
+    }
+
+    public function setLineCallback($lineCallback)
+    {
+        $this->lineCallback = $lineCallback;
     }
 }

@@ -40,9 +40,13 @@ class Sh
         $output  = null;
         $command = new Command($name, $comandArgument);
         $command->setSh($this);
-        $command->setLineCallback($lineCallback);
 
-        return $command;
+        if (is_null($lineCallback)) {
+            return $command;
+        } else {
+            $command->setLineCallback($lineCallback);
+            return $command->doCallback();
+        }
     }
 
     private function getCommandToProcess($name, $comandArgument)

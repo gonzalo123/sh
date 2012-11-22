@@ -26,11 +26,10 @@ class BakingTest extends \PHPUnit_Framework_TestCase
     public function testBake1()
     {
         $comand = $this->sh->ssh(array('myserver.com', '-p' => 1393))->whoami()->getString();
-
         $this->assertEquals('ssh myserver.com -p 1393 whoami', $comand);
     }
 
-    public function testBake2()
+    public function _testBake2()
     {
         $comand = $this->sh
                 ->ssh(array('myserver.com', '-p' => 1393))
