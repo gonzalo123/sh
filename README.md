@@ -43,7 +43,7 @@ $sh->ssh(array('myserver.com', '-p' => 1393))->tail(array("/var/log/dumb_daemon.
 Composer require:
 ```
     "require":{
-        "gonzalo123/sh": "dev-master",
+        "gonzalo123/sh": "v1.0",
         "symfony/process":"dev-master"
     },`
 
